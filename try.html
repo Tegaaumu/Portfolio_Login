@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>try animated button</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            border: 0;
+            outline: 0;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background: black;
+        }
+        #button{
+            position: relative;
+            display: inline-block;
+            padding: 12px 36px;
+            border-radius: 36px;
+            overflow: hidden;
+            background: linear-gradient(#005999, #006cb9);
+            font: 600 22px 'Poppins';
+            color: blanchedalmond;
+            letter-spacing: 1px;
+            margin: 50px 0;
+        }
+        span{
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            background: #ffffff;
+            animation:  styl 1s linear infinite;
+        }
+        @keyframes styl {
+            from{
+                width: 0;
+                height: 0;
+                opacity: .2;
+            }
+            to{
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="button">Hover Me</button>
+    <button id="button">Hover Me</button>
+    <script>
+        let but = document.querySelectorAll("#button");
+        
+        but.forEach(but => {
+              but.addEventListener('mouseenter', function (e) {
+            const x = e.clientX - e.target.offsetLeft;
+            const y = e.clientY - e.target.offsetTop;
+            const ripple = document.createElement('span');
+
+            ripple.style.left = `${x}px`;// Note always use currly brasess{} nor bracket()
+            ripple.style.top = `${y}px`;
+
+            this.appendChild(ripple);
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+            // console.log('look at your');
+        });
+        });
+      
+    </script>
+</body>
+</html>
